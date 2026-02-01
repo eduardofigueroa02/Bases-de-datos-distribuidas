@@ -114,3 +114,5 @@ INSERT INTO orderProduct (orderID, productID, quantity, price) VALUES
 (2, 3, 1, 450.00),
 (4, 4, 1, 3500.00),
 (5, 5, 1, 4200.00);
+Insert into address (street, localy, city, postcode, state) VALUES 
+('calle mango', 'mangonesia', 'Madrid',38913, 'Akira');
