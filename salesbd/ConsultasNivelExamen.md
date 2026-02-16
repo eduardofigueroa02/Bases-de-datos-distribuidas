@@ -264,7 +264,7 @@ HAVING COUNT(DISTINCT address.city) > 1;
 
 ---
 
-## 📊 Resumen de Técnicas Utilizadas
+## Resumen
 
 ✔ **INNER JOIN** - Unión de múltiples tablas  
 ✔ **GROUP BY** - Agrupación de datos  
