@@ -5,7 +5,7 @@ _______________________________
 
 ---
 
-## 1. 🧠 Cliente con mayor gasto total
+## 1. Cliente con mayor gasto total
 
 ```sql
 USE tiendachida;
@@ -27,7 +27,7 @@ SELECT customer.name AS nombre_cliente,
 
 ---
 
-## 2. 🧠 Producto más vendido (en unidades)
+## 2. Producto más vendido (en unidades)
 
 ```sql
 USE tiendachida;
@@ -49,7 +49,7 @@ SELECT product.name AS nombre_producto,
 
 ---
 
-## 3. 🧠 Total de ventas por ciudad
+## 3. Total de ventas por ciudad
 
 ```sql
 USE tiendachida;
@@ -74,7 +74,7 @@ SELECT address.city AS ciudad,
 
 ---
 
-## 4. 🧠 Clientes con más de una dirección
+## 4. Clientes con más de una dirección
 
 ```sql
 USE tiendachida;
@@ -95,7 +95,7 @@ HAVING COUNT(customerAddress.addressID) > 1;
 
 ---
 
-## 5. 🧠 Pedidos con total superior al promedio
+## 5. Pedidos con total superior al promedio
 
 ```sql
 USE tiendachida;
@@ -120,7 +120,7 @@ SELECT orderID,
 
 ---
 
-## 6. 🧠 Proveedor con más productos vendidos
+## 6. Proveedor con más productos vendidos
 
 ```sql
 USE tiendachida;
@@ -143,7 +143,7 @@ SELECT supplier.name AS nombre_proveedor,
 
 ---
 
-## 7. 🧠 Clientes que nunca cancelaron pedidos
+## 7. Clientes que nunca cancelaron pedidos
 
 ```sql
 USE tiendachida;
@@ -171,7 +171,7 @@ SELECT DISTINCT customer.customerID,
 
 ---
 
-## 8. 🧠 Ingreso total por método de pago
+## 8. Ingreso total por método de pago
 
 ```sql
 USE tiendachida;
@@ -194,7 +194,7 @@ SELECT paymentMethod AS metodo_pago,
 
 ---
 
-## 9. 🧠 Pedidos con más de un producto distinto
+## 9. Pedidos con más de un producto distinto
 
 ```sql
 USE tiendachida;
@@ -217,7 +217,7 @@ HAVING COUNT(DISTINCT orderProduct.productID) > 1;
 
 ---
 
-## 10. 🧠 Clientes con pedidos en más de una ciudad
+## 10.  Clientes con pedidos en más de una ciudad
 
 ```sql
 USE tiendachida;
