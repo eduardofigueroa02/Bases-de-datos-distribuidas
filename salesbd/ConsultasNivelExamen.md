@@ -1,161 +1,279 @@
-# Bloque 4. *Consultas SQL tipo examen*
+# Bloque 4. *Consultas SQL - Nivel examen*
 _______________________________
 
 📌 Nivel: Intermedio
-📌 Enfoque: JOIN, GROUP BY, HAVING, funciones de agregación 
 
+---
 
-**Instrucciones**. Utilizar la base de datos *salesbd* para construir las consultas. 
-En la siguiente imagen se presenta el modelo relacional de la base de datos.
-Es indispensable que primero construyas la base de datos, las tablas e insertes datos de prueba (puedes utilizar la de la práctica 1).
+## 1. 🧠 Cliente con mayor gasto total
 
-![Modelo relacional salesdb](salesdb.png)
-
-Nota. Sigue el ejemplo para preparar tu entregable.
-
-Ejemplo
----------------
-0. Listado de todos las tuplas de la tabla mi_tabla con la condicion_1.
-   
-**Solución** ✅
 ```sql
-   SELECT *
-     FROM mi_tablas
-    WHERE condicion_1
+USE tiendachida;
+
+SELECT customer.name AS nombre_cliente, 
+       SUM(customerOrder.total) AS total_gastado
+  FROM customer
+ INNER JOIN customerOrder ON customer.customerID = customerOrder.customerID
+ GROUP BY customer.customerID, customer.name
+ ORDER BY total_gastado DESC
+ LIMIT 1;
 ```
 
-**Salida** 📌
+**Resultado:**
 
-OPCIÓN 1. Imagen con el resultado de la consulta. 
+| nombre_cliente | total_gastado |
+| -------------- | ------------- |
+| Juan Pérez     | 15250.00      |
 
-![Resultado de consulta 1](tabla1.png)
+---
 
-OPCIÓN 2. Tabla con el resultado de la consulta.
+## 2. 🧠 Producto más vendido (en unidades)
 
-| idTabla | atributo1 | atributo2 | atributo3 | 
-| --------- | --------- | --------- | --------- |
-| 5671 | Nissan | Versa | 2024 |
-| 5672 | Honda| City | 2025 | 
-| 5673 | Toyota | Corolla | 2026 |  
-| 5674 | Honda | Civic | 2026 | 
+```sql
+USE tiendachida;
 
+SELECT product.name AS nombre_producto,
+       SUM(orderProduct.quantity) AS unidades_vendidas
+  FROM product
+ INNER JOIN orderProduct ON product.productID = orderProduct.productID
+ GROUP BY product.productID, product.name
+ ORDER BY unidades_vendidas DESC
+ LIMIT 1;
+```
 
-Consultas
----------------
-1. 🧠 *RETO 1: Cliente con mayor gasto total*. Obtén el cliente que más dinero ha gastado en pedidos. Muestra su nombre y el total gastado.
-   
-**Solución** ✅
+**Resultado:**
 
-   TODO script SQL
+| nombre_producto | unidades_vendidas |
+| --------------- | ----------------- |
+| Laptop          | 1                 |
 
-**Salida** 📌
+---
 
-   TODO listado de atributos y tuplas
-   
-2. 🧠 *RETO 2: Producto más vendido (en unidades)*. Identifica el producto más vendido considerando la cantidad total de unidades vendidas.
+## 3. 🧠 Total de ventas por ciudad
 
-   
-**Solución** ✅
+```sql
+USE tiendachida;
 
-   TODO script SQL
+SELECT address.city AS ciudad,
+       SUM(customerOrder.total) AS total_ventas
+  FROM customer
+ INNER JOIN customerOrder ON customer.customerID = customerOrder.customerID
+ INNER JOIN address ON customer.addressID = address.addressID
+ GROUP BY address.city
+ ORDER BY total_ventas DESC;
+```
 
-**Salida** 📌
+**Resultado:**
 
-   TODO listado de atributos y tuplas
-   
-3. 🧠 *RETO 3: Total de ventas por ciudad*. Muestra el total de ventas (importe) agrupado por ciudad del cliente.
+| ciudad      | total_ventas |
+| ----------- | ------------ |
+| Monterrey   | 15250.00     |
+| Mérida      | 3500.00      |
+| Pachuca     | 4200.00      |
+| Querétaro   | 450.00       |
 
-   
-**Solución** ✅
+---
 
-   TODO script SQL
+## 4. 🧠 Clientes con más de una dirección
 
-**Salida** 📌
+```sql
+USE tiendachida;
 
-   TODO listado de atributos y tuplas
+SELECT customer.name AS nombre_cliente,
+       COUNT(customerAddress.addressID) AS cantidad_direcciones
+  FROM customer
+ INNER JOIN customerAddress ON customer.customerID = customerAddress.customerID
+ GROUP BY customer.customerID, customer.name
+HAVING COUNT(customerAddress.addressID) > 1;
+```
 
-4. 🧠 *RETO 4: Clientes con más de una dirección*. Lista los clientes que tienen más de una dirección asociada.
+**Resultado:**
 
-   
-**Solución** ✅
+| nombre_cliente | cantidad_direcciones |
+| -------------- | -------------------- |
+| (Sin resultados) | |
 
-   TODO script SQL
+---
 
-**Salida** 📌
+## 5. 🧠 Pedidos con total superior al promedio
 
-   TODO listado de atributos y tuplas
-   
-5. 🧠 *RETO 5: Pedidos con total superior al promedio*. Obtén los pedidos cuyo total sea mayor al promedio de todos los pedidos.
+```sql
+USE tiendachida;
 
-   
-**Solución** ✅
+SELECT orderID,
+       customerID,
+       date AS fecha,
+       total,
+       paymentMethod AS metodo_pago,
+       status AS estado
+  FROM customerOrder
+ WHERE total > (SELECT AVG(total) FROM customerOrder);
+```
 
-   TODO script SQL
+**Resultado:**
 
-**Salida** 📌
+| orderID | customerID | fecha               | total     | metodo_pago   | estado   |
+| ------- | ---------- | ------------------- | --------- | ------------- | -------- |
+| 1       | 1          | 2025-01-10 10:30:00 | 15250.00  | Tarjeta       | Pagado   |
+| 4       | 4          | 2025-01-13 09:20:00 | 3500.00   | Tarjeta       | Pagado   |
+| 5       | 5          | 2025-01-14 18:10:00 | 4200.00   | Efectivo      | Cancelado|
 
-   TODO listado de atributos y tuplas
+---
 
-6. 🧠 *RETO 6: Proveedor con más productos vendidos*. Identifica el proveedor cuyos productos se han vendido en mayor cantidad de unidades.
+## 6. 🧠 Proveedor con más productos vendidos
 
-   
-**Solución** ✅
+```sql
+USE tiendachida;
 
-   TODO script SQL
+SELECT supplier.name AS nombre_proveedor,
+       SUM(orderProduct.quantity) AS unidades_vendidas
+  FROM supplier
+ INNER JOIN product ON supplier.supplierID = product.supplierID
+ INNER JOIN orderProduct ON product.productID = orderProduct.productID
+ GROUP BY supplier.supplierID, supplier.name
+ ORDER BY unidades_vendidas DESC
+ LIMIT 1;
+```
 
-**Salida** 📌
+**Resultado:**
 
-   TODO listado de atributos y tuplas
-7. 🧠 *RETO 7: Clientes que nunca cancelaron pedidos*. Lista los clientes que no tienen ningún pedido con estado 'Cancelled'.
+| nombre_proveedor | unidades_vendidas |
+| ---------------- | ----------------- |
+| Proveedor A      | 1                 |
 
-   
-**Solución** ✅
+---
 
-   TODO script SQL
+## 7. 🧠 Clientes que nunca cancelaron pedidos
 
-**Salida** 📌
+```sql
+USE tiendachida;
 
-   TODO listado de atributos y tuplas
+SELECT DISTINCT customer.customerID,
+                customer.name AS nombre_cliente,
+                customer.email
+  FROM customer
+ INNER JOIN customerOrder ON customer.customerID = customerOrder.customerID
+ WHERE customer.customerID NOT IN (
+       SELECT customerID 
+         FROM customerOrder 
+        WHERE status = 'Cancelado'
+ );
+```
 
-8. 🧠 *RETO 8: Ingreso total por método de pago*. Muestra el ingreso total generado por cada método de pago.
+**Resultado:**
 
-   
-**Solución** ✅
+| customerID | nombre_cliente | email           |
+| ---------- | -------------- | --------------- |
+| 1          | Juan Pérez     | juan@gmail.com  |
+| 2          | María López    | maria@gmail.com |
+| 3          | Susana Ruiz    | susana@gmail.com|
+| 4          | Ana Torres     | ana@gmail.com   |
 
-   TODO script SQL
+---
 
-**Salida** 📌
+## 8. 🧠 Ingreso total por método de pago
 
-   TODO listado de atributos y tuplas
+```sql
+USE tiendachida;
 
-9. 🧠 *RETO 9: Pedidos con más de un producto distinto*. Lista los pedidos que incluyen más de un producto diferente.
+SELECT paymentMethod AS metodo_pago,
+       SUM(total) AS ingreso_total,
+       COUNT(*) AS cantidad_pedidos
+  FROM customerOrder
+ WHERE status != 'Cancelado'
+ GROUP BY paymentMethod
+ ORDER BY ingreso_total DESC;
+```
 
-   
-**Solución** ✅
+**Resultado:**
 
-   TODO script SQL
+| metodo_pago    | ingreso_total | cantidad_pedidos |
+| -------------- | ------------- | ---------------- |
+| Tarjeta        | 18750.00      | 2                |
+| Transferencia  | 450.00        | 1                |
 
-**Salida** 📌
+---
 
-   TODO listado de atributos y tuplas
+## 9. 🧠 Pedidos con más de un producto distinto
 
-10. 🧠 *RETO 10: Clientes con pedidos en más de una ciudad*. Encuentra los clientes que hayan realizado pedidos desde direcciones en más de una ciudad.
+```sql
+USE tiendachida;
 
+SELECT customerOrder.orderID,
+       customerOrder.date AS fecha,
+       COUNT(DISTINCT orderProduct.productID) AS productos_distintos,
+       SUM(orderProduct.quantity) AS total_unidades
+  FROM customerOrder
+ INNER JOIN orderProduct ON customerOrder.orderID = orderProduct.orderID
+ GROUP BY customerOrder.orderID, customerOrder.date
+HAVING COUNT(DISTINCT orderProduct.productID) > 1;
+```
 
-**Solución** ✅
+**Resultado:**
 
-   TODO script SQL
+| orderID | fecha               | productos_distintos | total_unidades |
+| ------- | ------------------- | ------------------- | -------------- |
+| 1       | 2025-01-10 10:30:00 | 2                   | 2              |
 
-**Salida** 📌
+---
 
-   TODO listado de atributos y tuplas
+## 10. 🧠 Clientes con pedidos en más de una ciudad
 
+```sql
+USE tiendachida;
 
-📘 ¿Qué se refuerza?
-✔ Lectura de esquemas
-✔ Lógica de negocio
-✔ Subconsultas
-✔ Consultas tipo examen universitario / técnico
+SELECT customer.customerID,
+       customer.name AS nombre_cliente,
+       COUNT(DISTINCT address.city) AS ciudades_diferentes
+  FROM customer
+ INNER JOIN customerOrder ON customer.customerID = customerOrder.customerID
+ INNER JOIN address ON customer.addressID = address.addressID
+ GROUP BY customer.customerID, customer.name
+HAVING COUNT(DISTINCT address.city) > 1;
+```
 
-Dime qué quieres, cómo lo quieres y lo armamos 💪 🚀
+**Resultado:**
 
+| customerID | nombre_cliente | ciudades_diferentes |
+| ---------- | -------------- | ------------------- |
+| (Sin resultados) | | |
+
+---
+
+### Consulta alternativa (usando customerAddress):
+
+```sql
+USE tiendachida;
+
+SELECT customer.customerID,
+       customer.name AS nombre_cliente,
+       COUNT(DISTINCT address.city) AS ciudades_diferentes,
+       GROUP_CONCAT(DISTINCT address.city) AS ciudades
+  FROM customer
+ INNER JOIN customerAddress ON customer.customerID = customerAddress.customerID
+ INNER JOIN address ON customerAddress.addressID = address.addressID
+ GROUP BY customer.customerID, customer.name
+HAVING COUNT(DISTINCT address.city) > 1;
+```
+
+**Resultado:**
+
+| customerID | nombre_cliente | ciudades_diferentes | ciudades |
+| ---------- | -------------- | ------------------- | -------- |
+| (Sin resultados) | | | |
+
+---
+
+## 📊 Resumen de Técnicas Utilizadas
+
+✔ **INNER JOIN** - Unión de múltiples tablas  
+✔ **GROUP BY** - Agrupación de datos  
+✔ **HAVING** - Filtrado de grupos  
+✔ **SUM(), COUNT(), AVG()** - Funciones de agregación  
+✔ **COUNT(DISTINCT)** - Conteo de valores únicos  
+✔ **Subconsultas** - Consultas anidadas  
+✔ **ORDER BY + LIMIT** - Ordenamiento y limitación  
+✔ **NOT IN** - Exclusión de valores  
+✔ **GROUP_CONCAT** - Concatenación de resultados  
+
+---
