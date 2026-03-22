@@ -26,7 +26,6 @@ Cada nodo del sistema distribuido debe ser **autónomo e independiente**. Cada s
 
 **Punto clave:** el sistema no colapsa si un nodo se desconecta del resto.
 
-> *Referencia:* Date (2001), p. 620 — *"Each site should be able to operate as a standalone system."*
 
 ---
 
@@ -36,8 +35,6 @@ El sistema **no debe depender de un único nodo central**, ya que representaría
 
 **Punto clave:** eliminar el SPOF es esencial para alta disponibilidad.
 
-> *Referencia:* Özsu, M. T. & Valduriez, P. (2020). *Principles of Distributed Database Systems* (4th ed.). Springer. Cap. 1, p. 8.
-
 ---
 
 ### Regla 3 — Operación Continua
@@ -46,8 +43,6 @@ El DDBMS debe ofrecer **disponibilidad ininterrumpida**. Las tareas de respaldo,
 
 **Punto clave:** objetivo de uptime ≥ 99.9 %.
 
-> *Referencia:* Date (2001), p. 621 — operaciones de mantenimiento no deben requerir detener el sistema.
-
 ---
 
 ### Regla 4 — Independencia de Ubicación *(Transparencia de Localización)*
@@ -55,8 +50,6 @@ El DDBMS debe ofrecer **disponibilidad ininterrumpida**. Las tareas de respaldo,
 Los usuarios y las aplicaciones **no deben saber en qué nodo físico** se almacenan los datos. La base de datos debe comportarse como si todos los datos fueran locales, abstrayendo la distribución mediante el diccionario de datos y sinónimos extendidos.
 
 **Punto clave:** el usuario accede a los datos sin conocer su ubicación física.
-
-> *Referencia:* Özsu & Valduriez (2020), Cap. 4 — *"Location transparency means users need not know where data is stored."*
 
 ---
 
@@ -68,8 +61,6 @@ Las tablas pueden **dividirse en fragmentos** (horizontal o vertical) y distribu
 - *Fragmentación horizontal* → división por filas (subconjuntos de registros).  
 - *Fragmentación vertical* → división por columnas (subconjuntos de atributos).
 
-> *Referencia:* Date (2001), p. 625; Özsu & Valduriez (2020), Cap. 5 — *Data Fragmentation*.
-
 ---
 
 ### Regla 6 — Independencia de Replicación
@@ -77,8 +68,6 @@ Las tablas pueden **dividirse en fragmentos** (horizontal o vertical) y distribu
 El sistema puede **mantener y sincronizar réplicas** de los datos en varios nodos automáticamente para mejorar disponibilidad y rendimiento. Los usuarios y aplicaciones no deben gestionar estas réplicas manualmente.
 
 **Punto clave:** la replicación mejora tolerancia a fallos y velocidad de lectura.
-
-> *Referencia:* Özsu & Valduriez (2020), Cap. 6 — *Data Replication and Consistency*.
 
 ---
 
@@ -88,8 +77,6 @@ El sistema debe incluir un **optimizador de consultas distribuidas** capaz de se
 
 **Punto clave:** el optimizador minimiza la transferencia de datos entre nodos (*semi-join optimization*).
 
-> *Referencia:* Date (2001), p. 630; Özsu & Valduriez (2020), Cap. 9 — *Distributed Query Processing*.
-
 ---
 
 ### Regla 8 — Administración Distribuida de Transacciones
@@ -97,9 +84,6 @@ El sistema debe incluir un **optimizador de consultas distribuidas** capaz de se
 Las transacciones pueden **abarcar múltiples nodos** y deben cumplir las propiedades **ACID** de forma global. Requiere protocolos como *Two-Phase Commit* (2PC) para garantizar atomicidad y control de concurrencia distribuido.
 
 **Punto clave:** ACID distribuido: Atomicidad · Consistencia · Aislamiento · Durabilidad.
-
-> *Referencia:* Date (2001), pp. 633–638 — *Distributed Transactions and 2PC Protocol*;  
-> Gray, J. & Reuter, A. (1992). *Transaction Processing: Concepts and Techniques*. Morgan Kaufmann. Cap. 12.
 
 ---
 
@@ -109,17 +93,11 @@ El sistema debe ejecutarse sobre **diferentes arquitecturas de hardware** (x86, 
 
 **Punto clave:** nodos heterogéneos en hardware pueden coexistir en el mismo sistema distribuido.
 
-> *Referencia:* Date (2001), p. 641.
-
 ---
 
 ### Regla 10 — Independencia del Sistema Operativo
 
 El DDBMS debe funcionar correctamente sobre **distintos sistemas operativos** (Windows, Linux, Unix, macOS, etc.). Un nodo con Linux y otro con Windows deben poder integrarse sin problemas de interoperabilidad.
-
-**Punto clave:** la heterogeneidad de SO no debe ser un obstáculo para la distribución.
-
-> *Referencia:* Özsu & Valduriez (2020), Cap. 2 — *Heterogeneous Distributed Databases*.
 
 ---
 
@@ -127,19 +105,11 @@ El DDBMS debe funcionar correctamente sobre **distintos sistemas operativos** (W
 
 El sistema debe soportar **diferentes protocolos y tecnologías de red** (TCP/IP, Ethernet, WAN, etc.). La infraestructura de comunicación no debe limitar qué nodos pueden participar.
 
-**Punto clave:** la comunicación es transparente independientemente del protocolo de red.
-
-> *Referencia:* Date (2001), p. 642.
-
 ---
 
 ### Regla 12 — Independencia del DBMS
 
 Los nodos pueden usar **distintos motores de bases de datos** (MySQL, PostgreSQL, Oracle, SQL Server, etc.) y aun así colaborar como parte del mismo sistema distribuido. Esto garantiza interoperabilidad entre sistemas legados y modernos.
-
-**Punto clave:** la heterogeneidad de DBMS permite integración de plataformas diversas.
-
-> *Referencia:* Özsu & Valduriez (2020), Cap. 3 — *Federated Database Systems and DBMS Independence*.
 
 ---
 
