@@ -494,4 +494,3 @@ Fragmentación Vertical:
 
 ---
 
-*Práctica realizada el 21 de marzo de 2026*
