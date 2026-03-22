@@ -513,13 +513,4 @@ Fragmentación Híbrida:
 
 ---
 
-## Referencia al Ejercicio Original
-
-Esta implementación sigue la guía del ejercicio 7.2 del repositorio:
-- https://github.com/ROY508822/Bases-de-Datos-Distribuidas/blob/main/Exercise_7/exercise7_2.md
-
-Adaptado para MySQL y corregido para la estructura real del backup de salesDB.
-
----
-
 *Práctica realizada el 21 de marzo de 2026*
