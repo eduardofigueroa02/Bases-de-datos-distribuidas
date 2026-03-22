@@ -1,4 +1,4 @@
-# Reporte de Práctica: Fragmentación Híbrida (Horizontal + Réplicas) de salesDB
+# Reporte de Práctica: Fragmentación Híbrida (Horizontal + Réplicas) de salesDB.
 
 ## Universidad Autónoma del Estado de Hidalgo
 ### Base de Datos Distribuidas
