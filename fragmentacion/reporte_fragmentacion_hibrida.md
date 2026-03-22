@@ -1,7 +1,18 @@
-# Reporte de Práctica: Fragmentación Híbrida (Horizontal + Réplicas) de salesDB.
+# Reporte de Práctica: Fragmentación Híbrida (Horizontal + Réplicas) de salesDB
 
 ## Universidad Autónoma del Estado de Hidalgo
 ### Base de Datos Distribuidas
+
+---
+
+> **NOTA IMPORTANTE**: Esta práctica utiliza los campos y estructura del archivo de backup real `salesBD_bk.sql`, no los campos teóricos descritos en el archivo exercise7 del profesor. Se identificaron y corrigieron discrepancias e inconsistencias entre la guía teórica y el backup real para garantizar que la fragmentación funcione correctamente con los datos reales.
+>
+> Principales diferencias corregidas:
+> - Campo `name` (único) en lugar de `firstName`/`lastName`
+> - Campo `detail` en lugar de `description`
+> - Campo `amount` en lugar de `stock`
+> - Campo `date` en lugar de `orderDate`
+> - Campo `total` en lugar de `totalAmount`
 
 ---
 
