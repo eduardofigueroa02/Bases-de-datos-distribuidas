@@ -5,7 +5,7 @@
 
 ---
 
-> **NOTA IMPORTANTE**: Esta práctica utiliza los campos y estructura del archivo de backup real `salesBD_bk.sql`, no los campos teóricos descritos en el archivo exercise7 del profesor. Se identificaron y corrigieron discrepancias e inconsistencias entre la guía teórica y el backup real para garantizar que la fragmentación funcione correctamente con los datos reales.
+> **NOTA IMPORTANTE**: Esta práctica utiliza los campos y estructura del archivo de backup real `salesBD_bk.sql`, no los campos teóricos descritos en el archivo exercise7 Se identificaron y corrigieron discrepancias e inconsistencias entre la guía teórica y el backup real para garantizar que la fragmentación funcione correctamente con los datos reales.
 >
 > Principales diferencias corregidas:
 > - Campo `name` (único) en lugar de `firstName`/`lastName`
@@ -524,4 +524,3 @@ Fragmentación Híbrida:
 
 ---
 
-*Práctica realizada el 21 de marzo de 2026*
