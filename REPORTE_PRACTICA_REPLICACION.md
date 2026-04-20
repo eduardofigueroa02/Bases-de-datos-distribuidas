@@ -1,6 +1,7 @@
 # Reporte de Práctica
 ## Diseño de Base de Datos Relacional y Replicación MySQL Master-Slave
 > Gestión de Equipos de Competencias de Programación · Abril 2025
+> Equipo: Eduardo Emmanuel Figueroa - Mario Avila Guzman
 
 ---
 
